@@ -9,6 +9,7 @@ import { Request, Response } from 'express';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
+  // TODO: only catches HttpExceptions,  unexpected runtime error (e.g. TypeORM connection failure) will bypass the filter and let NestJS return its default error shape, which includes a stack trace in development that could leak in production if NODE_ENV is not set correctly. Change to @Catch() (catch-all) and return a generic 500 for non-HttpException errors.
   catch(exception: HttpException, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -36,7 +37,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       message,
       errors,
       timestamp: new Date().toISOString(),
-      path: request.url,
+      path: request.path,
     });
   }
 }

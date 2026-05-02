@@ -21,6 +21,7 @@ export function middleware(request: NextRequest): NextResponse {
 
   if (isProtected && !isAuthenticated) {
     const loginUrl = new URL("/login", request.url);
+    // Fixme: In a real implementation, the callback URL should be URL-encoded and validated to prevent open redirect vulnerabilities.
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
