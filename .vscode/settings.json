@@ -1,0 +1,45 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.tabSize": 2,
+  "editor.rulers": [100],
+
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+
+  "tailwindCSS.experimental.classRegex": [
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "github.copilot.chat.reviewSelection.instructions": [
+    { "file": ".github/instructions/nestjs.instructions.md" },
+    { "file": ".github/instructions/nextjs.instructions.md" }
+  ],
+
+  "github.copilot.editor.enableAutoCompletions": true,
+
+  "eslint.workingDirectories": [
+    { "directory": "apps/web", "changeProcessCWD": true },
+    { "directory": "apps/api", "changeProcessCWD": true }
+  ],
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/coverage": true
+  },
+
+  "jest.jestCommandLine": "npm test",
+  "jest.rootPath": "apps/api"
+}

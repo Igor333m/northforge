@@ -1,0 +1,18 @@
+{
+  "name": "northforgefreight",
+  "version": "1.0.0",
+  "description": "Northforge Freight Website and API",
+  "author": "Igor Todorovic",
+  "main": "index.js",
+  "keywords": [],
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:api": "npm run start:dev --workspace=apps/api"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "recommendations": [
+    // Core AI
+    "github.copilot-chat",
+
+    // TypeScript & formatting
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.vscode-typescript-next",
+
+    // Next.js / React
+    "bradlc.vscode-tailwindcss",
+    "dsznajder.es7-react-js-snippets",
+    "formulahendry.auto-rename-tag",
+
+    // NestJS / Backend
+    "firsttris.vscode-jest-runner",
+    "orta.vscode-jest",
+
+    // Database
+    "cweijan.vscode-postgresql-client2",
+    "cweijan.vscode-redis-client",
+
+    // Docker
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+
+    // Git & productivity
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "christian-kohler.path-intellisense",
+
+    // REST client (test endpoints without Postman)
+    "humao.rest-client"
+  ]
+}

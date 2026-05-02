@@ -1,0 +1,36 @@
+node_modules
+.env
+.env.*
+!.env.example
+.next
+dist
+coverage
+*.log
+.DS_Store
+
+.github
+
+# TypeScript incremental build artifact
+tsconfig.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# temp directory
+.temp
+.tmp
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
