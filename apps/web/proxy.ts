@@ -7,7 +7,7 @@ const PROTECTED_PREFIXES = ["/dashboard"];
 // Routes that should redirect to dashboard if already authenticated
 const AUTH_ROUTES = ["/login", "/register"];
 
-export function middleware(request: NextRequest): NextResponse {
+export function proxy(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl;
 
   // TODO: Replace with real token validation once auth is implemented.
