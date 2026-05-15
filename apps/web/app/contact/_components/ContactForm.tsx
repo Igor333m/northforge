@@ -1,5 +1,7 @@
 "use client";
 
+import { AlertError } from "@/components/ui/alerts/AlertError";
+import { AlertSuccess } from "@/components/ui/alerts/AlertSuccess";
 import { CONTACT } from "@/constants/content";
 import {
   contactFormSchema,
@@ -59,11 +61,7 @@ export function ContactForm() {
   );
 
   if (status === "success") {
-    return (
-      <p className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
-        {CONTACT.form.successMessage}
-      </p>
-    );
+    return <AlertSuccess message={CONTACT.form.successMessage} />;
   }
 
   return (
@@ -147,9 +145,7 @@ export function ContactForm() {
         onExpire={() => setCaptchaToken(null)}
       />
 
-      {status === "error" && (
-        <p className="text-sm text-red-600">{CONTACT.form.errorMessage}</p>
-      )}
+      {status === "error" && <AlertError message={CONTACT.form.errorMessage} />}
 
       <button
         type="submit"
@@ -158,6 +154,14 @@ export function ContactForm() {
       >
         {status === "loading" ? "Sending..." : CONTACT.form.submitLabel}
       </button>
+
+      <input
+        type="text"
+        name="_gotcha"
+        style={{ position: "absolute", left: "-9999px" }}
+        tabIndex={-1}
+        autoComplete="off"
+      />
     </form>
   );
 }

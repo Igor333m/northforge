@@ -1,5 +1,8 @@
 "use client";
 
+import { CONTACT } from "@/constants/content";
+import { AlertSuccess } from "@/components/ui/alerts/AlertSuccess";
+import { AlertError } from "@/components/ui/alerts/AlertError";
 import {
   applicationFormSchema,
   type ApplicationFormValues,
@@ -56,6 +59,10 @@ export function ApplicationForm() {
     },
     [captchaToken, reset],
   );
+
+  if (status === "success") {
+    return <AlertSuccess message={CONTACT.form.successMessage} />
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -161,15 +168,8 @@ export function ApplicationForm() {
         onExpire={() => setCaptchaToken(null)}
       />
 
-      {status === "success" && (
-        <p className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
-          Thanks for applying. We will be in touch soon.
-        </p>
-      )}
       {status === "error" && (
-        <p className="text-sm text-red-600">
-          Something went wrong. Please try again.
-        </p>
+        <AlertError message={CONTACT.form.errorMessage} />
       )}
 
       <button
@@ -179,6 +179,14 @@ export function ApplicationForm() {
       >
         {status === "loading" ? "Submitting..." : "Apply Now"}
       </button>
+
+      <input
+        type="text"
+        name="_gotcha"
+        style={{ position: "absolute", left: "-9999px" }}
+        tabIndex={-1}
+        autoComplete="off"
+      />
     </form>
   );
 }

@@ -1,0 +1,30 @@
+:root {
+  /* Brand */
+  --color-navy: #041323;
+  --color-navy-border: #0f2e4f;
+  --color-navy-hover: #0b2137;
+  --color-navy-active: #0e2a44;
+
+  /* Blue */
+  --color-blue: #0964b0;
+  --color-blue-hover: #0c77d1;
+  --color-blue-light: #58aaf0;
+  --color-blue-tint: #e6f1fb;
+
+  /* Misc UI */
+  --color-hamburger-border: #1b4f7a;
+
+  /* Semantic — success */
+  --color-success-border: #bbf7d0;
+  --color-success-bg: #f0fdf4;
+  --color-success-text: #166534;
+
+  /* Semantic — error */
+  --color-error-border: #f87171;
+  --color-error-bg: #fee2e2;
+  --color-error-text: #b91c1c;
+
+  /* Base */
+  --background: #ffffff;
+  --foreground: #041323;
+}

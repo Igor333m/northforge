@@ -28,10 +28,17 @@ async function bootstrap(): Promise<void> {
   );
 
   const configService = app.get(ConfigService);
+  const allowedOrigin = configService.get<string>('ALLOWED_ORIGIN');
+
+  if (!allowedOrigin?.trim()) {
+    throw new Error(
+      'Missing required ALLOWED_ORIGIN configuration for credentialed CORS',
+    );
+  }
 
   app.use(helmet());
   app.enableCors({
-    origin: configService.get<string>('ALLOWED_ORIGIN'), // e.g. https://yourapp.com
+    origin: allowedOrigin, // e.g. https://yourapp.com
     credentials: true,
   });
   const port = configService.get<number>('PORT', 3001);
