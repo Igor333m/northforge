@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
@@ -18,6 +19,8 @@ async function bootstrap(): Promise<void> {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
+
+  // TODO: Swagger is exposed with no authentication gate, which is fine for now but should be protected in production (e.g. with basic auth or IP whitelisting).
   SwaggerModule.setup(
     'api/docs',
     app,
@@ -25,6 +28,12 @@ async function bootstrap(): Promise<void> {
   );
 
   const configService = app.get(ConfigService);
+
+  app.use(helmet());
+  app.enableCors({
+    origin: configService.get<string>('ALLOWED_ORIGIN'), // e.g. https://yourapp.com
+    credentials: true,
+  });
   const port = configService.get<number>('PORT', 3001);
   await app.listen(port);
 }
