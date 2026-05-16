@@ -4,8 +4,8 @@ import { AlertError } from "@/components/ui/alerts/AlertError";
 import { AlertSuccess } from "@/components/ui/alerts/AlertSuccess";
 import { CONTACT } from "@/constants/content";
 import {
-  contactFormSchema,
-  type ContactFormValues,
+    contactFormSchema,
+    type ContactFormValues,
 } from "@/lib/schemas/contact.schema";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +13,12 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 
 // NOTE: NEXT_PUBLIC_FORMSPREE_ID is set in .env — this is the Formspree form endpoint.
-const FORMSPREE_URL = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`;
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+const FORMSPREE_URL = FORMSPREE_ID
+  ? `https://formspree.io/f/${FORMSPREE_ID}`
+  : null;
+const FORMSPREE_CONFIG_ERROR =
+  "This form is temporarily unavailable because it is not configured.";
 
 export function ContactForm() {
   const [status, setStatus] = useState<
@@ -35,6 +40,11 @@ export function ContactForm() {
 
   const onSubmit = useCallback(
     async (data: ContactFormValues) => {
+      if (!FORMSPREE_URL) {
+        setStatus("error");
+        return;
+      }
+
       if (!captchaToken) return;
       setStatus("loading");
       try {
@@ -66,6 +76,8 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      {!FORMSPREE_URL && <AlertError message={FORMSPREE_CONFIG_ERROR} />}
+
       <div>
         <label
           htmlFor="name"
@@ -149,7 +161,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        disabled={status === "loading" || !captchaToken}
+        disabled={status === "loading" || !captchaToken || !FORMSPREE_URL}
         className="w-full rounded-full bg-(--color-blue) px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-(--color-blue-hover) disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {status === "loading" ? "Sending..." : CONTACT.form.submitLabel}
