@@ -1,4 +1,8 @@
-/*
+/api/*
+  X-RateLimit-Limit: 10
+  X-RateLimit-Window: 60
+  
+  /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
