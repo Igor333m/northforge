@@ -1,3 +1,7 @@
+// TODO: Phase 2 — this module is unused during the static-only phase (Phase 1).
+// When the NestJS backend (apps/api) is live, import `api` from here in Server Components
+// and Client Components instead of calling fetch() directly. Set NEXT_PUBLIC_API_URL in
+// .env to point at the backend base URL (e.g. http://localhost:3001 locally).
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 if (!BASE_URL) {

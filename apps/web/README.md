@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Northforge Freight Web
 
-## Getting Started
+Marketing site built with Next.js App Router and exported as a static site for deployment on Render.
 
-First, run the development server:
+## Local development
+
+From the repository root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev:web
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Copy `apps/web/.env.example` to `apps/web/.env.local` and set:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+NEXT_PUBLIC_HCAPTCHA_SITE_KEY=your_hcaptcha_site_key
+NEXT_PUBLIC_FORMSPREE_ID=your_formspree_form_id
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Static build
 
-## Learn More
+From the repository root:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+npm run build --workspace=apps/web
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The static export is written to `apps/web/out`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy to Render
 
-## Deploy on Vercel
+Use GitHub as the provider and connect the repository in Render. This repo includes a root-level `render.yaml`, so Render can import the static site settings automatically.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The blueprint configures:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- a static site service named `northforgefreight-web`
+- the build command `npm install && npm run build --workspace=apps/web`
+- the publish path `apps/web/out`
+- prompted environment variables for `NEXT_PUBLIC_HCAPTCHA_SITE_KEY` and `NEXT_PUBLIC_FORMSPREE_ID`
+
+If you create the service manually instead of using the blueprint, use those same values in the Render dashboard.
