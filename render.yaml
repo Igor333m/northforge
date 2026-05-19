@@ -4,6 +4,31 @@ services:
     name: northforgefreight-web
     buildCommand: npm install && npm run build --workspace=apps/web
     staticPublishPath: apps/web/out
+    headers:
+      - path: /api/*
+        name: X-RateLimit-Limit
+        value: "10"
+      - path: /api/*
+        name: X-RateLimit-Window
+        value: "60"
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=(), payment=()
+      - path: /*
+        name: Strict-Transport-Security
+        value: max-age=63072000; includeSubDomains; preload
+      - path: /*
+        name: Content-Security-Policy
+        value: default-src 'self'; script-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com https://fonts.googleapis.com; frame-src https://hcaptcha.com https://*.hcaptcha.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io https://hcaptcha.com https://*.hcaptcha.com https://sentry.io https://*.sentry.io;
     autoDeployTrigger: commit
     envVars:
       - key: NEXT_PUBLIC_HCAPTCHA_SITE_KEY

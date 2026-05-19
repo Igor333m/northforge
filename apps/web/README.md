@@ -31,9 +31,11 @@ The static export is written to `apps/web/out`.
 
 ## Security headers
 
-`apps/web/public/_headers` is the single source of truth for HTTP response headers in production. Keep all security and rate-limit header definitions in this file.
+On Render, response headers are configured in `render.yaml` under the static site's `headers` section.
 
-`apps/web/next.config.ts` intentionally does not define `headers()` so header configuration does not drift between local and deployed environments.
+`apps/web/public/_headers` can be kept for local reference or portability, but deployed header behavior on Render comes from `render.yaml`.
+
+`apps/web/next.config.ts` intentionally does not define `headers()` because static export ignores Next.js custom header routes in production.
 
 ## Deploy to Render
 
