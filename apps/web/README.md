@@ -29,6 +29,12 @@ npm run build --workspace=apps/web
 
 The static export is written to `apps/web/out`.
 
+## Security headers
+
+`apps/web/public/_headers` is the single source of truth for HTTP response headers in production. Keep all security and rate-limit header definitions in this file.
+
+`apps/web/next.config.ts` intentionally does not define `headers()` so header configuration does not drift between local and deployed environments.
+
 ## Deploy to Render
 
 Use GitHub as the provider and connect the repository in Render. This repo includes a root-level `render.yaml`, so Render can import the static site settings automatically.
