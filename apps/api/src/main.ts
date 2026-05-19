@@ -21,6 +21,7 @@ async function bootstrap(): Promise<void> {
     .build();
 
   // TODO: Swagger is exposed with no authentication gate, which is fine for now but should be protected in production (e.g. with basic auth or IP whitelisting).
+  // OWASP A05 Security Misconfiguration: Swagger API docs are exposed unconditionally in all environments, with no auth gate.
   SwaggerModule.setup(
     'api/docs',
     app,
