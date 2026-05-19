@@ -33,8 +33,6 @@ The static export is written to `apps/web/out`.
 
 On Render, response headers are configured in `render.yaml` under the static site's `headers` section.
 
-`apps/web/public/_headers` can be kept for local reference or portability, but deployed header behavior on Render comes from `render.yaml`.
-
 `apps/web/next.config.ts` intentionally does not define `headers()` because static export ignores Next.js custom header routes in production.
 
 ## Deploy to Render
